@@ -1,5 +1,5 @@
 class Curso 
-    attr_accessor :cod_curso, :cr, :alunos
+  attr_accessor :cod_curso, :cr, :alunos
 
 	def initialize(cod_curso)
   	@cod_curso = cod_curso

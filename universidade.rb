@@ -97,5 +97,4 @@ class Universidade
       curso.adicionar_aluno(aluno) unless curso.possui_aluno(aluno)
     end
   end
-
 end
