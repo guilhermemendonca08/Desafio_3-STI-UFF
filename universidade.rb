@@ -1,7 +1,7 @@
 require 'csv'
 require_relative 'aluno'
 require_relative 'curso'
-require_relative 'disciplina_cursada'
+require_relative 'disciplina'
 
 class Universidade
   attr_accessor :alunos, :cursos, :arquivo, :cursos
@@ -37,13 +37,12 @@ class Universidade
   def mostrar_cr_cursos
     codigos_cursos = @cursos.keys.sort
     puts "-"*7 + "CR Médio dos Cursos" + "-" *7
+    
     codigos_cursos.each do |cod_curso|
       curso = @cursos[cod_curso]
       print "#{cod_curso} - "
-
       cr_formatado = format('%.2f', curso.cr)
       puts cr_formatado
-
       puts "-"*33
     end
   end
@@ -77,7 +76,7 @@ class Universidade
   end
 
   def criar_disciplina(aluno, registro)
-    disciplina = DisciplinaCursada.new(registro["COD_DISCIPLINA"].to_i, registro["CARGA_HORARIA"].to_i, registro["NOTA"].to_i)
+    disciplina = Disciplina.new(registro["COD_DISCIPLINA"].to_i, registro["CARGA_HORARIA"].to_i, registro["NOTA"].to_i)
   end
 
   def criar_cursos
