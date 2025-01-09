@@ -4,7 +4,7 @@ require_relative 'curso'
 require_relative 'disciplina'
 
 class Universidade
-  attr_accessor :alunos, :cursos, :arquivo, :cursos
+  attr_accessor :alunos, :cursos, :arquivo
 
   def initialize(arquivo)
     @alunos = {}
@@ -61,7 +61,7 @@ class Universidade
       matricula_aluno = registro["MATRICULA"].to_i
       if(matricula_aluno != ultima_matricula_criada) 
         aluno = Aluno.new(matricula_aluno)
-        disciplina = criar_disciplina(aluno, registro)
+        disciplina = criar_disciplina(registro)
         aluno.adicionar_disciplina_cursada(disciplina)
                 
         @alunos[matricula_aluno] = aluno
@@ -69,14 +69,14 @@ class Universidade
 
       else
         aluno = @alunos[ultima_matricula_criada]
-        disciplina = criar_disciplina(aluno, registro)
+        disciplina = criar_disciplina(registro)
         aluno.adicionar_disciplina_cursada(disciplina)
       end
     end
   end
 
-  def criar_disciplina(aluno, registro)
-    disciplina = Disciplina.new(registro["COD_DISCIPLINA"].to_i, registro["CARGA_HORARIA"].to_i, registro["NOTA"].to_i)
+  def criar_disciplina(registro)
+    Disciplina.new(registro["COD_DISCIPLINA"].to_i, registro["CARGA_HORARIA"].to_i, registro["NOTA"].to_i)
   end
 
   def criar_cursos
